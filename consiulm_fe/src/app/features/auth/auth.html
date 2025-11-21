@@ -1,148 +1,175 @@
 <app-header></app-header>
-<div class="auth-container">
-    <p-card class="auth-card">
-        <div class="tab-header">
-            <p-button
-                    [outlined]="activeTab() !== 'login'"
-                    label="Login"
-                    (onClick)="activeTab.set('login')"
-            ></p-button>
 
-            <p-button
-                    [outlined]="activeTab() !== 'register'"
-                    label="Registrazione"
-                    (onClick)="activeTab.set('register')"
-            ></p-button>
+<main class="min-h-screen main-bg relative overflow-hidden">
+    <!-- Background Element similar to Home -->
+    <div class="absolute inset-0 grid place-items-center pointer-events-none">
+        <div class="w-[600px] h-[600px] rounded-full opacity-10 blur-[60px] animate-pulse-bg"
+             style="background: radial-gradient(circle, var(--primary) 0%, transparent 70%);">
         </div>
+    </div>
+    <div class="auth-container">
+        <!-- Replaced p-card with custom glass div for better styling control -->
+        <div class="auth-card glass-effect">
+            <h2 class="text-3xl font-bold text-center mb-6 animate-glow text-surface-0">
+                {{ activeTab() === 'login' ? 'Welcome Back' : 'Join Us' }}
+            </h2>
 
-        @if (activeTab() === 'login') {
-            <form [formGroup]="loginForm" (ngSubmit)="login()" class="form">
-                <div class="p-field">
-                    <label for="email">Email</label>
-                    <input pInputText id="email" formControlName="email"/>
-                </div>
-
-                <div class="p-field">
-                    <label for="password">Password</label>
-                    <p-password
-                            id="password"
-                            formControlName="password"
-                            [feedback]="false"
-                            [toggleMask]="true"
-                    ></p-password>
-                </div>
+            <div class="tab-header">
+                <p-button
+                        [outlined]="activeTab() !== 'login'"
+                        [text]="activeTab() !== 'login'"
+                        label="Login"
+                        (onClick)="activeTab.set('login')"
+                        styleClass="w-32"
+                ></p-button>
 
                 <p-button
-                        type="submit"
-                        label="Accedi"
-                        [disabled]="!loginForm.valid"
-                        styleClass="w-full mt-3"
+                        [outlined]="activeTab() !== 'register'"
+                        [text]="activeTab() !== 'register'"
+                        label="Registrati"
+                        (onClick)="activeTab.set('register')"
+                        styleClass="w-32"
                 ></p-button>
-            </form>
-        }
+            </div>
 
-        @if (activeTab() === 'register') {
-            <div class="stepper">
-                <div class="steps">
-                    <span [class.active]="registerStep() === 1">1</span>
-                    <span [class.active]="registerStep() === 2">2</span>
-                    <span [class.active]="registerStep() === 3">3</span>
-                </div>
+            @if (activeTab() === 'login') {
+                <form [formGroup]="loginForm" (ngSubmit)="login()" class="form">
+                    <div class="p-field">
+                        <label for="email">Email</label>
+                        <input pInputText id="email" formControlName="email" placeholder="nome@esempio.com"/>
+                    </div>
 
-                <form [formGroup]="registerForm" (ngSubmit)="register()" class="form">
+                    <div class="p-field">
+                        <label for="password">Password</label>
+                        <p-password
+                                id="password"
+                                formControlName="password"
+                                [feedback]="false"
+                                [toggleMask]="true"
+                                placeholder="••••••••"
+                        ></p-password>
+                    </div>
 
-                    @if (registerStep() === 1) {
-                        <div class="p-field">
-                            <label for="r-name">Nome</label>
-                            <input pInputText id="r-name" formControlName="name"/>
-                        </div>
+                    <p-button
+                            type="submit"
+                            label="Accedi"
+                            [disabled]="!loginForm.valid"
+                            styleClass="w-full mt-2"
+                    ></p-button>
+                </form>
+            }
 
-                        <div class="p-field">
-                            <label for="r-surname">Cognome</label>
-                            <input pInputText id="r-surname" formControlName="surname"/>
-                        </div>
+            @if (activeTab() === 'register') {
+                <div class="stepper">
+                    <div class="steps">
+                        <span [class.active]="registerStep() >= 1">1</span>
+                        <span [class.active]="registerStep() >= 2">2</span>
+                        <span [class.active]="registerStep() >= 3">3</span>
+                    </div>
+
+                    <form [formGroup]="registerForm" (ngSubmit)="register()" class="form">
+
+                        @if (registerStep() === 1) {
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="p-field">
+                                    <label for="r-name">Nome</label>
+                                    <input pInputText id="r-name" formControlName="name"/>
+                                </div>
+
+                                <div class="p-field">
+                                    <label for="r-surname">Cognome</label>
+                                    <input pInputText id="r-surname" formControlName="surname"/>
+                                </div>
+                            </div>
 
 
-                        <label>Sei qui per...</label>
-                        <div class="p-field-radiobutton">
-                            <p-radioButton
-                                    name="role"
-                                    value="ADVISOR"
-                                    formControlName="role"
-                                    inputId="role-advisor">
-                            </p-radioButton>
-                            <label for="role-advisor"> Dare consiglio</label>
-                        </div>
-                        <div class="p-field-radiobutton">
-                            <p-radioButton
-                                    name="role"
-                                    value="USER"
-                                    formControlName="role"
-                                    inputId="role-seeker">
-                            </p-radioButton>
-                            <label for="role-seeker"> Cercare consiglio</label>
-                        </div>
+                            <div class="p-field mt-2">
+                                <label class="mb-2">Sei qui per...</label>
+                                <div class="flex flex-col gap-2">
+                                    <div class="p-field-radiobutton">
+                                        <p-radioButton
+                                                name="role"
+                                                value="ADVISOR"
+                                                formControlName="role"
+                                                inputId="role-advisor">
+                                        </p-radioButton>
+                                        <label for="role-advisor">Dare consiglio (Advisor)</label>
+                                    </div>
+                                    <div class="p-field-radiobutton">
+                                        <p-radioButton
+                                                name="role"
+                                                value="USER"
+                                                formControlName="role"
+                                                inputId="role-seeker">
+                                        </p-radioButton>
+                                        <label for="role-seeker">Cercare consiglio (User)</label>
+                                    </div>
+                                </div>
+                            </div>
 
 
-                        <p-button label="Avanti" (onClick)="nextStep()"
-                                  [disabled]="!registerForm.get('name')?.valid
-                                  || !registerForm.get('surname')?.valid
-                                  || !registerForm.get('role')?.valid"></p-button>
-                    }
-
-                    @if (registerStep() === 2) {
-
-                        <div class="p-field">
-                            <label for="r-email">Email</label>
-                            <input pInputText id="r-email" type="email" formControlName="email"/>
-                        </div>
-
-                        @if (isAdvisor) {
-                            <div class="p-field">
-                                <label for="multi_select_professione">Professione</label>
-                                <p-multiselect
-                                        id="multi_select_professione"
-                                        [options]="JOBS"
-                                        [group]="true"
-                                        formControlName="jobs"
-                                        scrollHeight="35vh"
-                                        display="chip"
-                                        pClass="w-full md:w-80"
-                                        [maxSelectedLabels]="2"
-                                        selectedItemsLabel="{0} professioni selezionate">
-                                    <ng-template let-group #group>
-                                        <div class="flex items-center">
-                                            <i [class]=group.icon></i>
-                                            <span>  {{ group.label }}</span>
-                                        </div>
-                                    </ng-template>
-                                </p-multiselect>
+                            <div class="flex justify-end mt-4">
+                                <p-button label="Avanti" (onClick)="nextStep()"
+                                          [disabled]="!registerForm.get('name')?.valid
+                                      || !registerForm.get('surname')?.valid
+                                      || !registerForm.get('role')?.valid"></p-button>
                             </div>
                         }
 
+                        @if (registerStep() === 2) {
 
-                        <div class="btn-row">
-                            <p-button label="Indietro" (onClick)="prevStep()"></p-button>
-                            <p-button label="Avanti" (onClick)="nextStep()"
-                                      [disabled]="!registerForm.get('email')?.valid"></p-button>
-                        </div>
-                    }
+                            <div class="p-field">
+                                <label for="r-email">Email</label>
+                                <input pInputText id="r-email" type="email" formControlName="email"/>
+                            </div>
 
-                    @if (registerStep() === 3) {
-                        <div class="p-field">
-                            <label for="r-password">Password</label>
-                            <p-password id="r-password" formControlName="password" [feedback]="true"
-                                        [toggleMask]="true"></p-password>
-                        </div>
+                            @if (isAdvisor) {
+                                <div class="p-field">
+                                    <label for="multi_select_professione">Professione</label>
+                                    <p-multiselect
+                                            id="multi_select_professione"
+                                            [options]="JOBS"
+                                            [group]="true"
+                                            formControlName="jobs"
+                                            scrollHeight="300px"
+                                            display="chip"
+                                            styleClass="w-full"
+                                            [maxSelectedLabels]="2"
+                                            selectedItemsLabel="{0} professioni selezionate">
+                                        <ng-template let-group #group>
+                                            <div class="flex items-center">
+                                                <i [class]=group.icon></i>
+                                                <span class="ml-2">{{ group.label }}</span>
+                                            </div>
+                                        </ng-template>
+                                    </p-multiselect>
+                                </div>
+                            }
 
-                        <div class="btn-row">
-                            <p-button label="Indietro" (onClick)="prevStep()"></p-button>
-                            <p-button label="Conferma" type="submit" [disabled]="!registerForm.valid"></p-button>
-                        </div>
 
-                    }
-                </form>
-            </div>
-        }
-    </p-card>
-</div>
+                            <div class="btn-row">
+                                <p-button label="Indietro" (onClick)="prevStep()" severity="secondary" [outlined]="true"></p-button>
+                                <p-button label="Avanti" (onClick)="nextStep()"
+                                          [disabled]="!registerForm.get('email')?.valid"></p-button>
+                            </div>
+                        }
+
+                        @if (registerStep() === 3) {
+                            <div class="p-field">
+                                <label for="r-password">Password</label>
+                                <p-password id="r-password" formControlName="password" [feedback]="true"
+                                            [toggleMask]="true" styleClass="w-full"></p-password>
+                            </div>
+
+                            <div class="btn-row">
+                                <p-button label="Indietro" (onClick)="prevStep()" severity="secondary" [outlined]="true"></p-button>
+                                <p-button label="Conferma" type="submit" [disabled]="!registerForm.valid"></p-button>
+                            </div>
+
+                        }
+                    </form>
+                </div>
+            }
+        </div>
+    </div>
+</main>

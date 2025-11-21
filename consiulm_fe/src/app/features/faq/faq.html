@@ -1,19 +1,31 @@
 <app-header></app-header>
-<div class="faq-wrapper">
-    <h1 class="title animate-glow">Frequently Asked Questions</h1>
 
-    <div class="faq-list">
-        @for (item of faq; track item) {
-            <div class="faq-card" (click)="toggle(item)">
-                <div class="faq-header">
-                    <h3 class="question">{{ item.q }}</h3>
-                    <span class="icon" [class.open]="item.open">⌄</span>
-                </div>
-
-                <div class="answer-wrapper" [class.open]="item.open">
-                    <p class="answer">{{ item.a }}</p>
-                </div>
-            </div>
-        }
+<!-- Added gradient background container similar to auth/home -->
+<main class="min-h-screen relative overflow-hidden" style="background: linear-gradient(to bottom, var(--ink-black), var(--prussian-blue));">
+    
+    <!-- Background decorative element -->
+    <div class="absolute inset-0 grid place-items-center pointer-events-none">
+        <div class="w-[800px] h-[800px] rounded-full opacity-5 blur-[80px] animate-pulse-bg"
+             style="background: radial-gradient(circle, var(--secondary) 0%, transparent 70%);">
+        </div>
     </div>
-</div>
+
+    <div class="faq-wrapper relative z-10">
+        <h1 class="title animate-glow">Frequently Asked Questions</h1>
+
+        <div class="faq-list">
+            @for (item of faq; track item) {
+                <div class="faq-card" (click)="toggle(item)">
+                    <div class="faq-header">
+                        <h3 class="question">{{ item.q }}</h3>
+                        <span class="icon" [class.open]="item.open">▼</span>
+                    </div>
+
+                    <div class="answer-wrapper" [class.open]="item.open">
+                        <p class="answer">{{ item.a }}</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</main>

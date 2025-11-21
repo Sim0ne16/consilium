@@ -9,7 +9,7 @@
   font-size: 3.25rem;
   font-weight: 700;
   margin-bottom: 3rem;
-  color: var(--surface-0);
+  color: var(--surface-1); /* was surface-0/white, now using theme light surface */
 }
 
 .faq-list {
@@ -26,8 +26,8 @@
 }
 
 .faq-card {
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.08);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 1rem;
   padding: 1.5rem 1.75rem;
   backdrop-filter: blur(12px);
@@ -37,6 +37,7 @@
   &:hover {
     transform: translateY(-4px);
     box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+    border-color: var(--primary);
   }
 }
 
@@ -49,15 +50,17 @@
 .question {
   font-size: 1.25rem;
   font-weight: 600;
-  color: var(--primary-300);
+  color: var(--primary); /* Using mapped primary (coral) */
 }
 
 .icon {
   transition: transform 0.3s ease;
+  color: var(--text-muted);
 }
 
 .icon.open {
   transform: rotate(180deg);
+  color: var(--primary);
 }
 
 .answer-wrapper {
@@ -74,6 +77,6 @@
 
 .answer {
   margin-top: 1rem;
-  color: var(--surface-200);
+  color: var(--alabaster-grey);
   line-height: 1.6;
 }
