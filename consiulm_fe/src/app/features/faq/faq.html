@@ -1,2 +1,19 @@
 <app-header></app-header>
-<p>faq works!</p>
+<div class="faq-wrapper">
+    <h1 class="title animate-glow">Frequently Asked Questions</h1>
+
+    <div class="faq-list">
+        @for (item of faq; track item) {
+            <div class="faq-card" (click)="toggle(item)">
+                <div class="faq-header">
+                    <h3 class="question">{{ item.q }}</h3>
+                    <span class="icon" [class.open]="item.open">⌄</span>
+                </div>
+
+                <div class="answer-wrapper" [class.open]="item.open">
+                    <p class="answer">{{ item.a }}</p>
+                </div>
+            </div>
+        }
+    </div>
+</div>

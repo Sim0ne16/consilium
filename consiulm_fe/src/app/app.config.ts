@@ -24,6 +24,7 @@ export const appConfig: ApplicationConfig = {
         provideZonelessChangeDetection(),
         provideRouter(routes),
         provideAnimationsAsync(),
+
         providePrimeNG({
             theme: {
                 preset: DeepSeaPreset,
@@ -32,9 +33,11 @@ export const appConfig: ApplicationConfig = {
                 }
             }
         }),
+
         provideStore({
             AppReducer
         }),
+
         provideEffects([]),
         provideStoreDevtools({maxAge: 25}),
         MessageService,

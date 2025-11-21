@@ -8,11 +8,54 @@
 }
 
 @keyframes pulse-bg {
-  0%   { transform: scale(1);   opacity: .06; }
-  50%  { transform: scale(1.18); opacity: .12; }
-  100% { transform: scale(1);   opacity: .06; }
+  0%   { transform: scale(1.1);   opacity: .5; }
+  50%  { transform: scale(1.2); opacity: 0.6; }
+  100% { transform: scale(1.1);   opacity: .5; }
 }
 
 .animate-pulse-bg {
   animation: pulse-bg 6s ease-in-out infinite;
 }
+
+.card {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.button {
+  transition: all 0.3s ease;
+  box-shadow: 0 0 15px rgba(var(--primary-rgb), 0.3);
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(var(--primary-rgb), 0.5);
+  }
+}
+
+.text-hover-effect {
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: var(--primary-300);
+    text-shadow: 0 0 8px rgba(var(--primary-rgb), 0.5);
+  }
+}
+
+.glass-effect {
+  background: linear-gradient(
+                  135deg,
+                  rgba(255, 255, 255, 0.1),
+                  rgba(255, 255, 255, 0.05)
+  );
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.36);
+}
+
