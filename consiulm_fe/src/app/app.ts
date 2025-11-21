@@ -1,12 +1,30 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import {Component} from '@angular/core';
+import {RouterOutlet} from "@angular/router";
+import {AsyncPipe} from "@angular/common";
+import {Store} from "@ngrx/store";
+import {Toast} from "primeng/toast";
+import {Observable} from "rxjs";
+import {AppState} from "./store/app.state";
+
 
 @Component({
-  selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.html',
-  styleUrl: './app.scss'
+    selector: 'app-root',
+    imports: [
+        RouterOutlet,
+        AsyncPipe,
+        Toast
+
+    ],
+    templateUrl: './app.html',
+    styleUrl: './app.scss'
 })
 export class App {
-  protected readonly title = signal('consiulm_fe');
+    loading$!: Observable<boolean>;
+
+    constructor(private store: Store<AppState>) {
+    }
+
+    ngOnInit(): void {
+        this.loading$ = this.store.select(s => s.loading);
+    }
 }

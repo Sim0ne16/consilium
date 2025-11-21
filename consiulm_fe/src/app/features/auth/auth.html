@@ -1,0 +1,148 @@
+<app-header></app-header>
+<div class="auth-container">
+    <p-card class="auth-card">
+        <div class="tab-header">
+            <p-button
+                    [outlined]="activeTab() !== 'login'"
+                    label="Login"
+                    (onClick)="activeTab.set('login')"
+            ></p-button>
+
+            <p-button
+                    [outlined]="activeTab() !== 'register'"
+                    label="Registrazione"
+                    (onClick)="activeTab.set('register')"
+            ></p-button>
+        </div>
+
+        @if (activeTab() === 'login') {
+            <form [formGroup]="loginForm" (ngSubmit)="login()" class="form">
+                <div class="p-field">
+                    <label for="email">Email</label>
+                    <input pInputText id="email" formControlName="email"/>
+                </div>
+
+                <div class="p-field">
+                    <label for="password">Password</label>
+                    <p-password
+                            id="password"
+                            formControlName="password"
+                            [feedback]="false"
+                            [toggleMask]="true"
+                    ></p-password>
+                </div>
+
+                <p-button
+                        type="submit"
+                        label="Accedi"
+                        [disabled]="!loginForm.valid"
+                        styleClass="w-full mt-3"
+                ></p-button>
+            </form>
+        }
+
+        @if (activeTab() === 'register') {
+            <div class="stepper">
+                <div class="steps">
+                    <span [class.active]="registerStep() === 1">1</span>
+                    <span [class.active]="registerStep() === 2">2</span>
+                    <span [class.active]="registerStep() === 3">3</span>
+                </div>
+
+                <form [formGroup]="registerForm" (ngSubmit)="register()" class="form">
+
+                    @if (registerStep() === 1) {
+                        <div class="p-field">
+                            <label for="r-name">Nome</label>
+                            <input pInputText id="r-name" formControlName="name"/>
+                        </div>
+
+                        <div class="p-field">
+                            <label for="r-surname">Cognome</label>
+                            <input pInputText id="r-surname" formControlName="surname"/>
+                        </div>
+
+
+                        <label>Sei qui per...</label>
+                        <div class="p-field-radiobutton">
+                            <p-radioButton
+                                    name="role"
+                                    value="ADVISOR"
+                                    formControlName="role"
+                                    inputId="role-advisor">
+                            </p-radioButton>
+                            <label for="role-advisor"> Dare consiglio</label>
+                        </div>
+                        <div class="p-field-radiobutton">
+                            <p-radioButton
+                                    name="role"
+                                    value="USER"
+                                    formControlName="role"
+                                    inputId="role-seeker">
+                            </p-radioButton>
+                            <label for="role-seeker"> Cercare consiglio</label>
+                        </div>
+
+
+                        <p-button label="Avanti" (onClick)="nextStep()"
+                                  [disabled]="!registerForm.get('name')?.valid
+                                  || !registerForm.get('surname')?.valid
+                                  || !registerForm.get('role')?.valid"></p-button>
+                    }
+
+                    @if (registerStep() === 2) {
+
+                        <div class="p-field">
+                            <label for="r-email">Email</label>
+                            <input pInputText id="r-email" type="email" formControlName="email"/>
+                        </div>
+
+                        @if (isAdvisor) {
+                            <div class="p-field">
+                                <label for="multi_select_professione">Professione</label>
+                                <p-multiselect
+                                        id="multi_select_professione"
+                                        [options]="JOBS"
+                                        [group]="true"
+                                        formControlName="jobs"
+                                        scrollHeight="35vh"
+                                        display="chip"
+                                        pClass="w-full md:w-80"
+                                        [maxSelectedLabels]="2"
+                                        selectedItemsLabel="{0} professioni selezionate">
+                                    <ng-template let-group #group>
+                                        <div class="flex items-center">
+                                            <i [class]=group.icon></i>
+                                            <span>  {{ group.label }}</span>
+                                        </div>
+                                    </ng-template>
+                                </p-multiselect>
+                            </div>
+                        }
+
+
+                        <div class="btn-row">
+                            <p-button label="Indietro" (onClick)="prevStep()"></p-button>
+                            <p-button label="Avanti" (onClick)="nextStep()"
+                                      [disabled]="!registerForm.get('email')?.valid"></p-button>
+                        </div>
+                    }
+
+                    @if (registerStep() === 3) {
+                        <div class="p-field">
+                            <label for="r-password">Password</label>
+                            <p-password id="r-password" formControlName="password" [feedback]="true"
+                                        [toggleMask]="true"></p-password>
+                        </div>
+
+                        <div class="btn-row">
+                            <p-button label="Indietro" (onClick)="prevStep()"></p-button>
+                            <p-button label="Conferma" type="submit" [disabled]="!registerForm.valid"></p-button>
+                        </div>
+
+                    }
+                </form>
+            </div>
+        }
+    </p-card>
+</div>

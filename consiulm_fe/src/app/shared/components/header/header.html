@@ -1,0 +1,30 @@
+<nav class="flex items-center justify-center h-16 bg-gradient-to-b from-primary-900 to-primary-950 shadow-lg relative">
+
+    <div class="absolute inset-0 grid place-items-center pointer-events-none">
+    </div>
+
+    <div class="z-10 flex gap-10 font-mono text-surface-0 text-sm md:text-base tracking-wide">
+
+        <a routerLink="/home"
+           routerLinkActive="active-link"
+           [routerLinkActiveOptions]="{ exact: true }"
+           class="menu-link transition-colors hover:text-primary-300 animate-glow">
+            HOME
+        </a>
+
+        <a routerLink="/faq"
+           routerLinkActive="active-link"
+           [routerLinkActiveOptions]="{ exact: true }"
+           class="menu-link transition-colors hover:text-primary-300 animate-glow">
+            FAQ
+        </a>
+
+        <a routerLink="/login"
+           routerLinkActive="active-link"
+           [routerLinkActiveOptions]="{ exact: true }"
+           class="menu-link transition-colors hover:text-primary-300 animate-glow">
+            LOGIN
+        </a>
+
+    </div>
+</nav>

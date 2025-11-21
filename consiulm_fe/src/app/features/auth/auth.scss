@@ -1,0 +1,108 @@
+:host {
+  display: block;
+  height: 100vh;
+  background-color: #111; /* elimina bianco globale */
+  color: var(--p-text-color);
+}
+
+h1 {
+  margin: 0;
+  padding: 1rem 2rem;
+  background-color: #0c0c0c;
+  color: var(--p-primary-color);
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+
+
+
+.auth-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 64px);
+  background: transparent;
+}
+
+.auth-card {
+  width: 25vw;
+  padding: 2rem;
+  border-radius: 1rem;
+  background: var(--p-surface-800);
+  color: var(--p-surface-0);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.tab-header {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.p-field label {
+  font-weight: 500;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+/* corregge layout del campo password */
+p-password {
+  width: 80%;
+
+  ::ng-deep .p-password-input {
+    width: 100%;
+    padding-right: 2.25rem !important; /* spazio per icona */
+  }
+
+  ::ng-deep .p-password-icon {
+    right: 0.75rem !important;
+    color: var(--p-text-color-secondary);
+  }
+
+  ::ng-deep input {
+    caret-color: var(--p-primary-color); /* cursore */
+  }
+}
+
+#email{
+  width: 80%;
+}
+
+.stepper .steps {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.stepper .steps span {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #333;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.4;
+}
+
+.stepper .steps span.active {
+  background: #00ff80;
+  opacity: 1;
+}
+
+.btn-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+
